@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>变温变电磁场纳米团簇点阵性能测试</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: "Microsoft YaHei", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      color: #333;
+    }
+
+    header {
+      text-align: center;
+      font-size: 32px;
+      font-weight: bold;
+      padding: 20px 0;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #eee;
+    }
+
+    .tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      color: #888;
+    }
+
+    .tab.active {
+      border-bottom: 3px solid #1877f2;
+      color: #1877f2;
+      font-weight: bold;
+    }
+
+    .tab.active:hover,.tab:hover{
+      text-decoration: underline;
+    }
+
+    .steps {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .step {
+      text-align: center;
+      margin: 0 10px;
+      color: #aaa;
+    }
+
+    .step.active {
+      color: black;
+      font-weight: bold;
+    }
+
+    .step-circle {
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      border-radius: 50%;
+      background-color: white;
+      border: 2px solid black;
+      margin: 0 auto 5px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-around;
+      padding: 0 40px 40px;
+      flex-wrap: wrap;
+    }
+
+    .left {
+      flex: 1 1 400px;
+      padding: 20px;
+    }
+
+    .left ul {
+      padding-left: 20px;
+    }
+
+    .right {
+      flex: 1 1 500px;
+      text-align: center;
+    }
+
+    .right img {
+      max-width: 100%;
+      height: auto;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+    }
+
+    .note {
+      color: #d33;
+      font-weight: bold;
+    }
+     #center{
+        width: 90%;
+        box-sizing: border-box;
+        background: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        position: relative;
+        z-index: 2;
+
+        padding: 0;
+         margin: 0 5% 0 5%
+
+       
+    }
+        /* 顶部导航栏 */
+    .navbar {
+      background-color: #173e63;  /* 深蓝背景 */
+      color: white;/*字体颜色*/
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .menu-icon {
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .nav-item, .nav-icon, .platform-title {
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .nav-item:hover, .nav-icon:hover {
+      text-decoration: underline;
+    }
+
+    .platform-title {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .login-btn, .register-btn {
+      background-color: transparent;
+      border: 1px solid white;
+      border-radius: 15px;
+      padding: 5px 15px;
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .register-btn {
+      background-color: #2a7dc3;
+      border: none;
+      margin-left: 5px;
+    }
+
+    .login-btn:hover, .register-btn:hover {
+      background-color: #4b90c6;
+    }
+  </style>
+</head>
+<body>
+
+
+  <header class="navbar">
+        <div class="nav-left">
+          <span class="menu-icon">☰</span>
+          <span class="nav-item">实验</span>
+          <span class="nav-item">学习</span>
+          <span class="nav-item">新闻</span>
+          <span class="nav-item dropdown">学生端 ▼</span>
+        </div>
+        <div class="nav-center">
+          <span class="platform-title">变温变电磁场纳米团簇点阵性能测试</span>
+        </div>
+        <div class="nav-right">
+          <span class="nav-icon">🔍</span>
+          <button class="login-btn">登录</button>
+          <button class="register-btn">注册</button>
+        </div>
+      </header>
+
+  
+
+  <div id="center">
+    <div class="tabs">
+    <div class="tab">请按照提示完成模拟实验！</div>
+  </div>
+  
+  <div class="container">
+    <div class="left">
+     
+    <!-- 步骤盒子 -->
+      <div class="steps">
+    <div class="step active"data-step="1">
+    <div class="step-circle">1</div>步骤1</div>
+    <div class="step" data-step="2"><div class="step-circle">2</div>步骤2</div>
+    <div class="step" data-step="3"><div class="step-circle">3</div>步骤3</div>
+    <div class="step" data-step="4"><div class="step-circle">4</div>步骤4</div>
+    <div class="step" data-step="5"><div class="step-circle">5</div>步骤5</div>
+  </div>
+
+ <div id="left-content">
+      <h3>步骤一：放置材料</h3>
+      <ol>
+        <li>观察实验设备</li>
+        <p>实验者从右侧开始，逆时针绕场一周，观察实验仪器。注意记录实验场景中的仪器名称、用途，已用线框图的形式标注在画面中。
+          该实验设计较为复杂，注意观察仪器整体结构、各个气体管道的去向、电子设备的接线情况。如有疑问，请返回实验预习部分，再次学习实验基础架构。
+        </p>
+        <li>切换仪器形态</li>
+        <p>实验者按画面拆除团簇束流沉设备的后部的螺丝，滑动左下方弹出的滑动条，使仪器切换至装载状态。</p>
+        <li>装载材料</li>
+        <p>实验者选择沉积材料，从实验台上拿取沉积材料，安装至圆形凹槽处。</p>
+        <li>复原仪器 </li>
+        <p>安装完毕，滑动左下方滑动条，切换至封闭状态，重新拧回螺丝，材料安装完毕。</p>
+        <li>放置衬底</li>
+        <p>实验仪器右端，滑动右侧滑动条，从八通管内抽出可旋转衬底，共两种可选则衬底：实验者进行泵浦探测实验，安装石英玻璃片衬底；实验者进行变温变磁场实验，安装叉指电极衬底。</p>
+      </ol>
+    </div>
+</div>
+    <!-- 右侧图片盒子 -->
+    <div class="right">、
+      <div id="right-content">
+      <img src="实验图片.jpg" alt="实验图像">
+      <h2>变温变电磁场纳米团簇点阵性能测试</h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <!-- JS代码 -->
+<script>
+  const stepContents = {
+    1: {
+      title: "步骤一：放置材料",
+      text: `
+      <ol>
+        <li>观察实验设备</li>
+        <p>实验者从右侧开始，逆时针绕场一周，观察实验仪器。注意记录实验场景中的仪器名称、用途，已用线框图的形式标注在画面中。
+          该实验设计较为复杂，注意观察仪器整体结构、各个气体管道的去向、电子设备的接线情况。如有疑问，请返回实验预习部分，再次学习实验基础架构。
+        </p>
+        <li>切换仪器形态</li>
+        <p>实验者按画面拆除团簇束流沉设备的后部的螺丝，滑动左下方弹出的滑动条，使仪器切换至装载状态。</p>
+        <li>装载材料</li>
+        <p>实验者选择沉积材料，从实验台上拿取沉积材料，安装至圆形凹槽处。</p>
+        <li>复原仪器 </li>
+        <p>安装完毕，滑动左下方滑动条，切换至封闭状态，重新拧回螺丝，材料安装完毕。</p>
+        <li>放置衬底</li>
+        <p>实验仪器右端，滑动右侧滑动条，从八通管内抽出可旋转衬底，共两种可选则衬底：实验者进行泵浦探测实验，安装石英玻璃片衬底；实验者进行变温变磁场实验，安装叉指电极衬底。</p>
+      </ol>
+      `,
+      img: "实验图片.jpg",
+      imgTitle: "变温变电磁场纳米团簇点阵性能测试 - 步骤一"
+    },
+    2: {
+      title: "步骤二：泵浦探测实验",
+      text: `
+       <ol>
+        <li>输入参数</li>
+        <p>1.1. 材料参数<br>
+         通过面板中的6个按钮更改实验材料，实验者通过滑动条和输入框更改参数值。<br>
+         1.2.脉冲激光参数<br>
+          包括脉冲波长和脉冲宽度，实验者通过滑动条和输入框更改参数值。<br>
+        </p>
+        <li>光路摆放</li>
+        <li>光线汇聚</li>
+        <li>时间零点的确认 </li>
+        <li>正式实验</li>
+        <li>数据处理</li>
+      </ol>
+      `,
+      img: "实验图片.jpg",
+      imgTitle: "变温变电磁场纳米团簇点阵性能测试 - 步骤二"
+    },
+    3: {
+      title: "步骤三：变温电学实验",
+      text: `
+        <p>实验步骤正在上传中，敬请期待</p>
+      `,
+      img: "实验图片.jpg",
+      imgTitle: "变温变电磁场纳米团簇点阵性能测试 - 步骤三"
+    },
+    4: {
+      title: "步骤四：关闭仪器",
+      text: `
+       <ol>
+        <li>把溅射电流和溅射功率都调整为0，关闭MDX500的On/Off按钮。</li>
+        <li>关闭气瓶的角阀和减压阀。</li>
+        <li>将溅射气流量和缓冲气流量设置为0。</li>
+        <li>关闭ReBorn电源。</li>
+        <li>关闭分子泵电源。</li>
+        <li>关闭罗茨泵电源。</li>
+        <li>关闭机械泵电源</li>
+        <li>关闭水闸电控按钮。</li>
+        <li>打开放气阀门，让空气进入束流仪，实际的放气阀如下图所示。</li>
+        <li>拔掉MDX500同轴线缆</li>
+      </ol>
+      `,
+      img: "实验图片.jpg",
+      imgTitle: "变温变电磁场纳米团簇点阵性能测试 - 步骤四"
+    },
+    5: {
+      title: "步骤五：提交数据",
+      text: `
+        <p>请点击提交数据按钮，提交本次实验数据</p>
+        <input type="button" value="提交" onclick="submit()">
+      `,
+      img: "实验图片.jpg",
+      imgTitle: "变温变电磁场纳米团簇点阵性能测试 - 步骤五"
+    }
+  };
+ 
+  // 监听.step类被点击
+  document.querySelectorAll(".step").forEach(step => {
+    step.addEventListener("click", () => {
+      const stepId = step.getAttribute("data-step");
+
+      // 切换步骤高亮
+      document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
+      step.classList.add("active");
+
+      // 更新文字和图像内容
+      const content = stepContents[stepId];
+      document.getElementById("left-content").innerHTML = `
+        <h3>${content.title}</h3>
+        ${content.text}
+      `;
+
+      document.getElementById("right-content").innerHTML = `
+        <img src="${content.img}" alt="步骤图像">
+        <h2>${content.imgTitle}</h2>
+      `;
+    });
+  });
+
+  //监听：数据提交与实验步骤按钮
+  function submit(){
+    alert("提交成功！")
+  }
+</script>
+
+</body>
+</html>
