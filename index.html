@@ -5,6 +5,28 @@
   <title>变温变电磁场纳米团簇点阵性能测试</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+        input[type="button"] {
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="button"]:hover {
+      background-color: #0056b3;
+    }
+
+    .fixed-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
     body {
       font-family: "Microsoft YaHei", sans-serif;
       margin: 0;
@@ -51,25 +73,59 @@
     }
 
     .step {
-      text-align: center;
-      margin: 0 10px;
-      color: #aaa;
+      display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #aaa;
+    cursor: pointer;
+    position: relative;
+    margin: 0 30px;
     }
 
     .step.active {
-      color: black;
+      color: green;
       font-weight: bold;
     }
+    .step.active .step-circle {
+    border-color: green;
+    background-color: green;
+    color: white;
+  }
+  /* 激活步骤后，前面横线变绿 */
+  .step.active ~ .step::after {
+    background-color: #aaa;
+  }
+  /* 使激活步骤前的横线变绿 */
+  .step.active::after {
+    background-color: green;
+  }
 
     .step-circle {
-      width: 30px;
-      height: 30px;
-      line-height: 30px;
-      border-radius: 50%;
-      background-color: white;
-      border: 2px solid black;
-      margin: 0 auto 5px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    background-color: white;
+    border: 2px solid #aaa;
+    margin-bottom: 5px;
+    font-weight: bold;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
     }
+    /* .step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 15px;  和圆圈垂直居中 
+    left: 100%;
+    width: 80px;
+    height: 2px;
+    background-color: var(--line-color, #aaa);
+    transition: background-color 0.3s;
+    z-index: -1;
+  } */
 
     .container {
       display: flex;
@@ -337,6 +393,16 @@
       title: "步骤五：提交数据",
       text: `
         <p>请点击提交数据按钮，提交本次实验数据</p>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
         <input type="button" value="提交" onclick="submit()">
       `,
       img: "实验图片.jpg",
@@ -448,8 +514,31 @@
       const stepId = step.getAttribute("data-step");
 
       // 切换步骤高亮
-      document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
-      step.classList.add("active");
+      // 先移除所有 active 样式和复原内容
+    document.querySelectorAll(".step").forEach((s, idx) => {
+      s.classList.remove("active");
+      const circle = s.querySelector(".step-circle");
+      circle.style.borderColor = "#aaa";
+      circle.style.backgroundColor = "white";
+      circle.style.color = "#aaa";
+      circle.textContent = (idx + 1);
+      // 清除连接线颜色
+      s.style.setProperty('--line-color', '#aaa');
+    });
+    // 给当前及之前步骤添加active样式和变绿、变对号
+    for (let i = 1; i <= stepId; i++) {
+      const s = document.querySelector(`.step[data-step="${i}"]`);
+      s.classList.add("active");
+      const circle = s.querySelector(".step-circle");
+      circle.style.borderColor = "green";
+      circle.style.backgroundColor = "green";
+      circle.style.color = "white";
+      circle.textContent = "✓";
+
+      // 让横线变绿（非最后一步）
+      if (i < stepId) {
+        s.style.setProperty('--line-color', 'green');
+      }
 
       // 更新文字和图像内容
       const content = stepContents[stepId];
@@ -462,6 +551,7 @@
       //   <img src="${content.img}" alt="步骤图像">
       //   <h2>${content.imgTitle}</h2>
       // `;
+      }
     });
   });
 
