@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>变温变电磁场纳米团簇点阵性能测试</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+        input[type="button"] {
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="button"]:hover {
+      background-color: #0056b3;
+    }
+
+    .fixed-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+    body {
+      font-family: "Microsoft YaHei", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      color: #333;
+    }
+
+    header {
+      text-align: center;
+      font-size: 32px;
+      font-weight: bold;
+      padding: 20px 0;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #eee;
+    }
+
+    .tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      color: #888;
+    }
+
+    .tab.active {
+      border-bottom: 3px solid #1877f2;
+      color: #1877f2;
+      font-weight: bold;
+    }
+
+    .tab.active:hover,.tab:hover{
+      text-decoration: underline;
+    }
+
+    .steps {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .step {
+      display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #aaa;
+    cursor: pointer;
+    position: relative;
+    margin: 0 30px;
+    }
+
+    .step.active {
+      color: green;
+      font-weight: bold;
+    }
+    .step.active .step-circle {
+    border-color: green;
+    background-color: green;
+    color: white;
+  }
+  /* 激活步骤后，前面横线变绿 */
+  .step.active ~ .step::after {
+    background-color: #aaa;
+  }
+  /* 使激活步骤前的横线变绿 */
+  .step.active::after {
+    background-color: green;
+  }
+
+    .step-circle {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 50%;
+    background-color: white;
+    border: 2px solid #aaa;
+    margin-bottom: 5px;
+    font-weight: bold;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
+    }
+    /* .step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 15px;  和圆圈垂直居中 
+    left: 100%;
+    width: 80px;
+    height: 2px;
+    background-color: var(--line-color, #aaa);
+    transition: background-color 0.3s;
+    z-index: -1;
+  } */
+
+    .container {
+      display: flex;
+      justify-content: space-around;
+      padding: 0 40px 40px;
+      flex-wrap: wrap;
+    }
+
+    .left {
+      flex: 1 1 400px;
+      padding: 20px;
+    }
+
+    .left ul {
+      padding-left: 20px;
+    }
+
+    .right {
+      flex: 1 1 500px;
+      text-align: center;
+    }
+
+    .right img {
+      max-width: 100%;
+      height: auto;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+    }
+
+    .note {
+      color: #d33;
+      font-weight: bold;
+    }
+     #center{
+        width: 90%;
+        box-sizing: border-box;
+        background: white;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        position: relative;
+        z-index: 2;
+
+        padding: 0;
+         margin: 0 5% 0 5%
+
+       
+    }
+        /* 顶部导航栏 */
+    .navbar {
+      background-color: #173e63;  /* 深蓝背景 */
+      color: white;/*字体颜色*/
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .menu-icon {
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .nav-item, .nav-icon, .platform-title {
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .nav-item:hover, .nav-icon:hover {
+      text-decoration: underline;
+    }
+
+    .platform-title {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .login-btn, .register-btn {
+      background-color: transparent;
+      border: 1px solid white;
+      border-radius: 15px;
+      padding: 5px 15px;
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .register-btn {
+      background-color: #2a7dc3;
+      border: none;
+      margin-left: 5px;
+    }
+
+    .login-btn:hover, .register-btn:hover {
+      background-color: #4b90c6;
+    }
+  </style>
+</head>
+<body>
+
+
+  <header class="navbar">
+        <div class="nav-left">
+          <span class="menu-icon">☰</span>
+          <span class="nav-item">实验</span>
+          <span class="nav-item">学习</span>
+          <span class="nav-item">新闻</span>
+          <span class="nav-item dropdown">学生端 ▼</span>
+        </div>
+        <div class="nav-center">
+          <span class="platform-title">变温变电磁场纳米团簇点阵性能测试</span>
+        </div>
+        <div class="nav-right">
+          <span class="nav-icon">🔍</span>
+          <button class="login-btn">登录</button>
+          <button class="register-btn">注册</button>
+        </div>
+      </header>
+
+  
+
+  <div id="center">
+    <div class="tabs">
+    <div class="tab">请按照提示完成模拟实验！</div>
+  </div>
+  
+  <div class="container">
+    <div class="left">
+     
+    <!-- 步骤盒子 -->
+    <div class="steps">
+    <div class="step active" data-step="1">
+    <div class="step-circle">1</div>步骤1</div>
+    <div class="step" data-step="2"><div class="step-circle">2</div>步骤2</div>
+    <div class="step" data-step="3"><div class="step-circle">3</div>步骤3</div>
+    <div class="step" data-step="4"><div class="step-circle">4</div>步骤4</div>
+    <div class="step" data-step="5"><div class="step-circle">5</div>步骤5</div>
+  </div>
+
+ <div id="left-content">
+      <h3>步骤一：团簇束流沉积材料制备</h3>
+      <ol class="page" data-page="1">
+        <li>放置材料</li>
+        <ol>
+          <li>1. 观察实验设备</li>
+          <p>实验者从右侧开始，逆时针绕场一周，观察实验仪器。注意记录实验场景中的仪器名称、用途，已用线框图的形式标注在画面中。
+            该实验设计较为复杂，注意观察仪器整体结构、各个气体管道的去向、电子设备的接线情况。如有疑问，请返回实验预习部分，再次学习实验基础架构。
+          </p>
+          <li>切换仪器形态</li>
+          <p>实验者按画面拆除团簇束流沉设备的后部的螺丝，滑动左下方弹出的滑动条，使仪器切换至装载状态。</p>
+          <li>装载材料</li>
+          <p>实验者选择沉积材料，从实验台上拿取沉积材料，安装至圆形凹槽处。</p>
+          <li>复原仪器 </li>
+          <p>安装完毕，滑动左下方滑动条，切换至封闭状态，重新拧回螺丝，材料安装完毕。</p>
+          <li>放置衬底</li>
+          <p>实验仪器右端，滑动右侧滑动条，从八通管内抽出可旋转衬底，共两种可选则衬底：实验者进行泵浦探测实验，安装石英玻璃片衬底；实验者进行变温变磁场实验，安装叉指电极衬底。</p>
+          <p class="note">步骤一未结束，请点击下一页继续阅读操作指导！</p>
+          <input type="button" value="下一页" onclick="nextPage()">
+          
+        </ol>
+      </ol>
+    </div>
+</div>
+    <!-- 右侧图片盒子 -->
+    <!-- <div class="right">、
+      <div id="right-content">
+      <img src="实验图片.jpg" alt="实验图像">
+      <h2>变温变电磁场纳米团簇点阵性能测试</h2>
+      </div>
+    </div> -->
+
+    <!-- unity测试 -->
+    <div class="right">
+      <iframe 
+        src="https://entelecheia-s.github.io/VE-ex/new/index.html" 
+        width="100%" height="600" 
+        style="border: none;">
+      </iframe>
+    </div>
+  </div>
+</div>
+
+ <!-- JS代码 -->
+<script>
+  const stepContents = {
+    1: {
+      title: "步骤一：团簇束流沉积材料制备",
+      text: `
+     <ol class="page" data-page="1">
+        <li>1. 放置材料</li>
+        <ol>
+          <li>观察实验设备</li>
+          <p>实验者从右侧开始，逆时针绕场一周，观察实验仪器。注意记录实验场景中的仪器名称、用途，已用线框图的形式标注在画面中。
+            该实验设计较为复杂，注意观察仪器整体结构、各个气体管道的去向、电子设备的接线情况。如有疑问，请返回实验预习部分，再次学习实验基础架构。
+          </p>
+          <li>切换仪器形态</li>
+          <p>实验者按画面拆除团簇束流沉设备的后部的螺丝，滑动左下方弹出的滑动条，使仪器切换至装载状态。</p>
+          <li>装载材料</li>
+          <p>实验者选择沉积材料，从实验台上拿取沉积材料，安装至圆形凹槽处。</p>
+          <li>复原仪器 </li>
+          <p>安装完毕，滑动左下方滑动条，切换至封闭状态，重新拧回螺丝，材料安装完毕。</p>
+          <li>放置衬底</li>
+          <p>实验仪器右端，滑动右侧滑动条，从八通管内抽出可旋转衬底，共两种可选则衬底：实验者进行泵浦探测实验，安装石英玻璃片衬底；实验者进行变温变磁场实验，安装叉指电极衬底。</p>
+          <p class="note">步骤一未结束，请点击下一页继续阅读操作指导！</p>
+           <input type="button" value="下一页" onclick="nextPage()">
+        </ol>
+      </ol>
+      `,
+      img: "实验图片.jpg",
+      imgTitle: "变温变电磁场纳米团簇点阵性能测试 - 步骤一"
+    },
+    2: {
+      title: "步骤二：泵浦探测实验",
+      text: `
+       <ol>
+        <li>输入参数</li>
+        <p>1.1. 材料参数<br>
+         通过面板中的6个按钮更改实验材料，实验者通过滑动条和输入框更改参数值。<br>
+         1.2.脉冲激光参数<br>
+          包括脉冲波长和脉冲宽度，实验者通过滑动条和输入框更改参数值。<br>
+        </p>
+        <li>光路摆放</li>
+        <li>光线汇聚</li>
+        <li>时间零点的确认 </li>
+        <li>正式实验</li>
+        <li>数据处理</li>
+      </ol>
+      `,
+      img: "实验图片.jpg",
+      imgTitle: "变温变电磁场纳米团簇点阵性能测试 - 步骤二"
+    },
+    3: {
+      title: "步骤三：变温电学实验",
+      text: `
+        <p>实验步骤正在上传中，敬请期待</p>
+      `,
+      img: "实验图片.jpg",
+      imgTitle: "变温变电磁场纳米团簇点阵性能测试 - 步骤三"
+    },
+    4: {
+      title: "步骤四：关闭仪器",
+      text: `
+       <ol>
+        <li>把溅射电流和溅射功率都调整为0，关闭MDX500的On/Off按钮。</li>
+        <li>关闭气瓶的角阀和减压阀。</li>
+        <li>将溅射气流量和缓冲气流量设置为0。</li>
+        <li>关闭ReBorn电源。</li>
+        <li>关闭分子泵电源。</li>
+        <li>关闭罗茨泵电源。</li>
+        <li>关闭机械泵电源</li>
+        <li>关闭水闸电控按钮。</li>
+        <li>打开放气阀门，让空气进入束流仪，实际的放气阀如下图所示。</li>
+        <li>拔掉MDX500同轴线缆</li>
+      </ol>
+      `,
+      img: "实验图片.jpg",
+      imgTitle: "变温变电磁场纳米团簇点阵性能测试 - 步骤四"
+    },
+    5: {
+      title: "步骤五：提交数据",
+      text: `
+        <p>请点击提交数据按钮，提交本次实验数据</p>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+
+        <input type="button" value="提交" onclick="submit()">
+      `,
+      img: "实验图片.jpg",
+      imgTitle: "变温变电磁场纳米团簇点阵性能测试 - 步骤五"
+    }
+  };
+ 
+  const pageContents = {
+     1: {
+      title: "步骤一：团簇束流沉积材料制备",
+      text: `
+     <ol class="page" data-page="1">
+        <li>1. 放置材料</li>
+        <ol>
+          <li>观察实验设备</li>
+          <p>实验者从右侧开始，逆时针绕场一周，观察实验仪器。注意记录实验场景中的仪器名称、用途，已用线框图的形式标注在画面中。
+            该实验设计较为复杂，注意观察仪器整体结构、各个气体管道的去向、电子设备的接线情况。如有疑问，请返回实验预习部分，再次学习实验基础架构。
+          </p>
+          <li>切换仪器形态</li>
+          <p>实验者按画面拆除团簇束流沉设备的后部的螺丝，滑动左下方弹出的滑动条，使仪器切换至装载状态。</p>
+          <li>装载材料</li>
+          <p>实验者选择沉积材料，从实验台上拿取沉积材料，安装至圆形凹槽处。</p>
+          <li>复原仪器 </li>
+          <p>安装完毕，滑动左下方滑动条，切换至封闭状态，重新拧回螺丝，材料安装完毕。</p>
+          <li>放置衬底</li>
+          <p>实验仪器右端，滑动右侧滑动条，从八通管内抽出可旋转衬底，共两种可选则衬底：实验者进行泵浦探测实验，安装石英玻璃片衬底；实验者进行变温变磁场实验，安装叉指电极衬底。</p>
+          <p class="note">步骤一未结束，请点击下一页继续阅读操作指导！</p>
+          <input type="button" value="下一页" onclick="nextPage()">
+        </ol>
+      </ol>
+      `,
+      img: "实验图片.jpg",
+      imgTitle: "变温变电磁场纳米团簇点阵性能测试 - 步骤一"
+    },
+     2:{ 
+      title: "步骤一：团簇束流沉积材料制备",//1.2
+      text: `
+     <ol class="page" data-page="2">
+        <li>2. 差分真空环境的建立</li>
+        <ol>
+          <li>启动阀门</li>
+          <p>实验者点击位于实验台面左下方的水电开关集成柜，在弹出的电源控制截面中开启水闸电控按钮。此时，冷却水开始向团簇腔输送。注意！四个电源必须按照：水闸机械泵罗茨泵分子泵的顺序开启，关闭时按相反顺序。
+            <p class="note">此处提醒实验者，该步骤极为重要，若破坏顺序，可能导致团簇腔失压，造成腔体裂口甚至爆炸，严重危及实验室安全！</p>
+          </p>
+          <li>检测气密性</li>
+          <p>按光标提示，依次打开三个阀门：旁抽阀门、溅射气阀门和缓冲气阀门。鼠标点击阀门开始操作，逆时针扭转开启，顺时针扭转关闭。</p>
+          <p>启动机械泵。在水电开关集成柜下方找到ReBorn，单击进入操作。ReBorn是一个关于气压表、气体流量表的仪器，</p>
+          <p>启动ReBorn。观察数码表中的度数，当前不断变化，随着抽气的进行，数码表度数下降到500左右时趋于稳定，表明500Pa是当前机械泵建立气压的极限。
+          拿起实验台上的酒精滴瓶，在刚刚装载沉积材料的可拆卸机构和真空腔体间的结合处滴酒精（蓝色高亮显示的部分）。观察ReBorn的气压表，如果稳定，则气密性良好；如果气压度数上升到550Pa，表明漏气，需要重新拧紧螺丝。
+          </p>
+          <li>建立差分真空</li>
+          <p>实验者启动罗茨泵。气压度数继续减小，到了所有度数均低于15Pa时，启动分子泵电源。差分真空得以建立。</p>
+          <p class="note">步骤一未结束，请点击下一页继续阅读操作指导！</p>
+           <input type="button" value="上一页" onclick="previousPage()">
+           <input type="button" value="下一页" onclick="nextPage()">
+        </ol>
+      </ol>
+      `,
+      img: "实验图片.jpg",
+      imgTitle: "变温变电磁场纳米团簇点阵性能测试 - 步骤一"
+    },
+    3:{ 
+          title: "步骤一：团簇束流沉积材料制备",//1.3
+          text: `
+        <ol class="page" data-page="3">
+            <li>3. 沉积速率的调整</li>
+            <ol>
+              <li>溅射启动</li>
+              <p>实验者绕行至实验装置后方，找到两个气瓶，鼠标单击气瓶阀门开始输气。</p>
+              <p>实验者拾取MDX500溅射电源控制柜后方的同轴电缆插头，接入装载沉积材料的可拆卸机构，如画面中高亮显示的部分。</p>
+              <li>软件监测沉积速率</li>
+              <p>实验者鼠标单击团簇腔体侧面的晶振，使其插入团簇腔室，阻挡墙内粒子流的前进。粒子流冲击在晶振上，传感器得以监测粒子流的流量密度。</p>
+              <p>打开笔记本电脑上的Cluster Beam Deposition，观察沉积速率随时间变化的曲线图。</p>
+              <li>溅射气体流量调节</li>
+              <p>实验者重新打开ReBorn界面，调节最下方的缓冲气流和溅射气流数值，使得缓冲气流=50sccm，溅射气流=60sccm，回车应用当前设置。</p>
+              <p>实验者打开MDX500溅射电源箱，调节溅射电流和溅射功率，使曲线图上的沉积速率稳定在0.2。至此，沉积过程的准备工作完毕。</p>  
+              <p class="note">步骤一未结束，请点击下一页继续阅读操作指导！</p>
+              <input type="button" value="上一页" onclick="previousPage()">
+              <input type="button" value="下一页" onclick="nextPage()">         
+               </ol>
+          </ol>
+          `,
+          img: "实验图片.jpg",
+          imgTitle: "变温变电磁场纳米团簇点阵性能测试 - 步骤一"
+        },
+     4:{ 
+          title: "步骤一：团簇束流沉积材料制备",//1.4
+          text: `
+        <ol class="page" data-page="4">
+            <li>4. 样品沉积</li>
+            <ol>
+              <li>金属纳米粒子的沉积</li>
+              <p>提起晶振，使纳米粒子流飞向八通管，进而沉积在衬底上。</p>
+              <li>制备成品观察</li>
+              <p>一定时间后，打开MDX500溅射电源箱，将溅射电流和溅射功率均调成0。此时，衬底上已经制备好了一定密度的纳米粒子点阵。实验者前往八通管，透过透明观察制备好的样品。实验者可鼠标单击可旋转衬底上方的把手，转动衬底板，从不同角度观察沉积好的样品。</p>  
+              <p class="note">步骤一结束，请点击步骤二继续阅读操作指导！</p>
+              <input type="button" value="上一页" onclick="previousPage()">
+               </ol>
+          </ol>
+          `,
+          img: "实验图片.jpg",
+          imgTitle: "变温变电磁场纳米团簇点阵性能测试 - 步骤一"
+        }
+  }
+  
+  // 监听.step类被点击
+  document.querySelectorAll(".step").forEach(step => {
+    step.addEventListener("click", () => {
+      const stepId = step.getAttribute("data-step");
+
+      // 切换步骤高亮
+      // 先移除所有 active 样式和复原内容
+    document.querySelectorAll(".step").forEach((s, idx) => {
+      s.classList.remove("active");
+      const circle = s.querySelector(".step-circle");
+      circle.style.borderColor = "#aaa";
+      circle.style.backgroundColor = "white";
+      circle.style.color = "#aaa";
+      circle.textContent = (idx + 1);
+      // 清除连接线颜色
+      s.style.setProperty('--line-color', '#aaa');
+    });
+    // 给当前及之前步骤添加active样式和变绿、变对号
+    for (let i = 1; i <= stepId; i++) {
+      const s = document.querySelector(`.step[data-step="${i}"]`);
+      s.classList.add("active");
+      const circle = s.querySelector(".step-circle");
+      circle.style.borderColor = "green";
+      circle.style.backgroundColor = "green";
+      circle.style.color = "white";
+      circle.textContent = "✓";
+
+      // 让横线变绿（非最后一步）
+      if (i < stepId) {
+        s.style.setProperty('--line-color', 'green');
+      }
+
+      // 更新文字和图像内容
+      const content = stepContents[stepId];
+      document.getElementById("left-content").innerHTML = `
+        <h3>${content.title}</h3>
+        ${content.text}
+      `;
+
+      // document.getElementById("right-content").innerHTML = `
+      //   <img src="${content.img}" alt="步骤图像">
+      //   <h2>${content.imgTitle}</h2>
+      // `;
+      }
+    });
+  });
+
+  //监听：数据提交与实验步骤按钮
+  function submit(){
+    alert("提交成功！");
+  }
+
+  //监听：步骤一的翻页操作
+  function nextPage(){
+  const currentPage = parseInt(document.querySelector('ol.page').dataset.page);
+  const nextPage = currentPage + 1;
+
+    // 更新文字和图像内容
+      const content = pageContents[nextPage];
+      document.getElementById("left-content").innerHTML = `
+        <h3>${content.title}</h3>
+        ${content.text}
+      `;
+
+      // document.getElementById("right-content").innerHTML = `
+      //   <img src="${content.img}" alt="步骤图像">
+      //   <h2>${content.imgTitle}</h2>
+      // `;
+  }
+
+  function previousPage(){
+  const currentPage = parseInt(document.querySelector('ol.page').dataset.page);
+  const previousPage = currentPage - 1;
+
+    // 更新文字和图像内容
+      const content = pageContents[previousPage];
+      document.getElementById("left-content").innerHTML = `
+        <h3>${content.title}</h3>
+        ${content.text}
+      `;
+
+      // document.getElementById("right-content").innerHTML = `
+      //   <img src="${content.img}" alt="步骤图像">
+      //   <h2>${content.imgTitle}</h2>
+      // `;
+  }
+  
+</script>
+
+</body>
+</html>
