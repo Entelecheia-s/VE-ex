@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>实验总结</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    input[type="button"] {
+      padding: 10px 20px;
+      background-color: white;
+      color: black;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="button"]:hover {
+      background-color: #0056b3;
+    }
+
+    .fixed-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    body {
+      font-family: "Microsoft YaHei", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      color: #333;
+    }
+
+    header {
+      text-align: center;
+      font-size: 32px;
+      font-weight: bold;
+      padding: 20px 0;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: left;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #eee;
+      gap: 78%;
+    }
+
+    .tab {
+      padding: 10px 20px;
+      cursor: pointer;
+      color: #888;
+    }
+
+    .tab.active {
+      border-bottom: 3px solid #1877f2;
+      color: #1877f2;
+      font-weight: bold;
+    }
+
+    .tab.active:hover,
+    .tab:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-around;
+      padding: 0 40px 40px;
+      flex-wrap: wrap;
+      position: relative;
+
+      width: 90%;
+      margin: 0 auto;
+      align-items: center;
+      gap: 90px;
+    }
+   
+    #center {
+      width: 90%;
+      box-sizing: border-box;
+      background: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      position: relative;
+      z-index: 2;
+
+      padding: 0;
+      margin: 0 5% 0 5%
+    }
+
+    /* 顶部导航栏 */
+    .navbar {
+      background-color: #173e63;
+      /* 深蓝背景 */
+      color: white;
+      /*字体颜色*/
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 20px;
+    }
+
+    .nav-left,
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .menu-icon {
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .nav-item,
+    .nav-icon,
+    .platform-title {
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .nav-item:hover,
+    .nav-icon:hover {
+      text-decoration: underline;
+    }
+
+    .platform-title {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .login-btn,
+    .register-btn {
+      background-color: transparent;
+      border: 1px solid white;
+      border-radius: 15px;
+      padding: 5px 15px;
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .register-btn {
+      background-color: #2a7dc3;
+      border: none;
+      margin-left: 5px;
+    }
+
+    .login-btn:hover,
+    .register-btn:hover {
+      background-color: #4b90c6;
+    }
+
+    p {
+      margin-bottom: 10px;
+      /* 控制段落底部与下一段的距离 */
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <header class="navbar">
+    <div class="nav-left">
+      <span class="menu-icon">☰</span>
+      <span class="nav-item">实验</span>
+      <span class="nav-item">学习</span>
+      <span class="nav-item">新闻</span>
+      <span class="nav-item dropdown">学生端 ▼</span>
+    </div>
+    <div class="nav-center">
+      <span class="platform-title">变温变电磁场纳米团簇点阵性能测试</span>
+    </div>
+    <div class="nav-right">
+      <span class="nav-icon">🔍</span>
+      <button class="login-btn">登录</button>
+      <button class="register-btn">注册</button>
+    </div>
+  </header>
+
+
+  <div id="center">
+    <div class="tabs">
+      <div class="tab"><input type="button" style="border: none;font-size: 14px; box-shadow:none;" value="<返回实验步骤"
+          onclick="goBack()"></div>
+      <div class="tab"><input type="button" style="border: none;font-size: 14px; box-shadow:none;" value="保存进度"
+          onclick="save()"></div>
+    </div>
+
+    <div class="container">
+      
+          <h1 style="justify-content: center;">实验总结</h1>
+          <ol>
+            <li>您实验用时共多少分多少秒;</li><br><br>
+            <li>您制备了，(这里写材料初始参数)的纳米粒子点阵;</li><br><br>
+            <li>在团簇束流沉积过程中，您操作小心谨慎，检查了装置的气密性;通过机械泵、分子泵和罗茨泵建立了差分真空，做到了规范操作、安全实验;</li><br><br>
+            <li>在泵浦探测中，您得到材料的“相对透射率-弛豫时间”曲线和“相对反射率-弛豫时间”曲线如下图所示(展示)。跃迁和弛豫过程反应物质的能级(带)差电子吸收截面，跃迁几率，能级寿命，凝聚态材料的电子结构等多方面的信息，具有重要意义。</li><br><br>
+            <li>本虚拟实验仅供教学参考，如果您进入实验室，请在专业人员的指导下操作。</li><br><br>
+          </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS代码 -->
+  <script>
+
+    //监听：数据提交与实验步骤按钮
+    function submit() {
+      alert("提交成功！");
+    }
+
+    function save() {
+      alert("保存成功！");
+    }
+
+    function goBack() {
+      history.back();
+    }
+  </script>
+
+</body>
+
+</html>
